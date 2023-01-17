@@ -20,25 +20,39 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
-//    @GetMapping("/")
+    @GetMapping("/")
+    public String showUsers() {
 //    public String showUsers(Model model) {
 //        model.addAttribute("users", userService.showUsers());
 //        return "users";
-//    }
-    @GetMapping("/users/new")
+        return "index";
+    }
+    @GetMapping("/admin")
+    public String showUsers(Model model) {
+        model.addAttribute("users", userService.showUsers());
+        return "admin";
+    }
+
+    @GetMapping("/edit")
+    public String updateUserForm(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.showUser(id));
+        return "showuser";
+    }
+
+    @GetMapping("/admin/new")
     public ModelAndView newUser() {
         User user = new User();
-        ModelAndView mav = new ModelAndView("user_form");
+        ModelAndView mav = new ModelAndView("adduser");
         mav.addObject("user", user);
         List<Role> roles = (List<Role>) roleRepository.findAll();
         mav.addObject("allRoles", roles);
         return mav;
     }
 
-    @GetMapping("/users/edit/{id}")
+    @GetMapping("/admin/edit/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
         User user = userService.showUser(id);
-        ModelAndView mav = new ModelAndView("user_form");
+        ModelAndView mav = new ModelAndView("adduser");
         mav.addObject("user", user);
         List<Role> roles = (List<Role>) roleRepository.findAll();
         mav.addObject("allRoles", roles);
@@ -63,9 +77,9 @@ public class UserController {
 //        userService.edit(id, user);
 //        return "redirect:/";
 //    }
-//    @DeleteMapping("/{id}/delete")
-//    public String deleteUser(@PathVariable("id") Long id) {
-//        userService.delete(id);
-//        return "redirect:/";
-//    }
+    @DeleteMapping("/admin/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.delete(id);
+        return "redirect:/admin";
+    }
 }

@@ -15,18 +15,18 @@
   </tr>
   <div th:each="user : ${users}">
     <td><a th:text="${user.getId()}">id</a></td>
-    <td><a th:text="${user.getName()}">name</a></td>
+    <td><a th:text="${user.getUsername()}">name</a></td>
     <td><a th:text="${user.getLastname()}">lastname</a></td>
     <td><a th:text="${user.getAge()}">age</a></td>
     <td>
-      <a th:href="@{/{id}/edit(id=${user.getId()})}">Edit</a>
-      <form th:method="DELETE" th:action="@{/{id}/delete(id=${user.getId()})}">
+      <a th:href="@{/admin/edit{id}(id=${user.getId()})}">Edit</a>
+      <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
         <input type="submit" value="Delete"/>
       </form>
     </td>
-    </tr>
   </div>
 </table>
-<a th:href="@{/addnew}" >Add user</a>
+<a th:href="@{/admin/new}" >Add user</a>
+<a th:href="@{/logout}" >Logout </a>
 </body>
 </html>
