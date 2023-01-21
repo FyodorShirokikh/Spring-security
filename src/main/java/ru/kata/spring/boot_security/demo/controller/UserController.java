@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 import java.util.List;
@@ -20,9 +19,6 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-    private RoleRepository roleRepository;
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) { this.roleRepository = roleRepository; }
 
     @GetMapping("/")
     public String homePage() {

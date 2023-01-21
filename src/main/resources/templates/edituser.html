@@ -24,7 +24,7 @@
     <div>
       <label>User password: </label>
       <div>
-        <input type="password" th:field="*{password}" />
+        <input type="password" th:field="*{password}" required minlength="2" maxlength="20" />
       </div>
     </div>
     <div>

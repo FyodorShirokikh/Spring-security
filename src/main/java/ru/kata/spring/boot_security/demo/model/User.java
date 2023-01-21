@@ -14,7 +14,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "username", nullable = true, unique = true, length = 45)
+    @Column(name = "username", unique = true, length = 45)
     private String username;
     @Column(name = "email", nullable = false, length = 45)
     private String email;
@@ -82,7 +82,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return (Collection<? extends GrantedAuthority>) getRoles();
+        return getRoles();
     }
 
     public void addRole (Role role) {

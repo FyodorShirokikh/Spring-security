@@ -56,6 +56,7 @@ public class UserService implements UserDetailsService {
     public List<Role> listRoles() {
         return roleRepository.findAll();
     }
+
     @Transactional
     public void save(User user) {
         encodePassword(user);
