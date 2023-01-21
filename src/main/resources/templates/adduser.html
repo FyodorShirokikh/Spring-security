@@ -6,20 +6,39 @@
 </head>
 <body>
 <h2>Add user:</h2>
-<form th:method="POST" th:action="@{/}" th:object="${user}">
-  <label for="uusername">Name</label>
-  <input type="text" th:field="*{username}" id="uusername"> <br>
-  <label for="ulastname">Lastname</label>
-  <input type="text" th:field="*{lastname}" id="ulastname"> <br>
-  <label for="uage">Age</label>
-  <input type="number" th:field="*{age}" id="uage"><br>
-  <label for="upassword">Password</label>
-  <input type="password" th:field="*{password}" id="upassword"><br>
-  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  <input type="submit" value="Create">
+<form th:method="POST" th:action="@{/admin/process_register}" th:object="${user}">
+  <div>
+    <div>
+      <label>User Name: </label>
+      <div>
+        <input type="text" th:field="*{username}" required minlength="2" maxlength="20" />
+      </div>
+    </div>
+    <div>
+      <label>User email: </label>
+      <div>
+        <input type="email" th:field="*{email}"  />
+      </div>
+    </div>
+    <div>
+      <label>User password: </label>
+      <div>
+        <input type="password" th:field="*{password}" />
+      </div>
+    </div>
+    <div>
+      <label>User age: </label>
+      <div>
+        <input type="number" th:field="*{age}" />
+      </div>
+    </div>
+    <div>
+      <button type="submit"> Add user </button>
+    </div>
+  </div>
 </form>
 <hr>
-<a th:href="@{/}"> Back to Users List</a>
+<a th:href="@{/admin}"> Back to Users List</a> <br>
 <a th:href="@{/logout}"> Logout </a>
 </body>
 </html>

@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,15 +14,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "username")
+    @Column(name = "username", nullable = true, unique = true, length = 45)
     private String username;
-    @Column(name = "lastname")
-    private String lastname;
-    @Column(name = "age")
+    @Column(name = "email", nullable = false, length = 45)
+    private String email;
+    @Column(name = "age", nullable = false)
     private int age;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 45)
     private String password;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    // @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -48,12 +48,12 @@ public class User implements UserDetails {
         this.username = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getAge() {
@@ -62,6 +62,10 @@ public class User implements UserDetails {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
@@ -81,9 +85,8 @@ public class User implements UserDetails {
         return (Collection<? extends GrantedAuthority>) getRoles();
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public void addRole (Role role) {
+        this.roles.add(role);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Objects;
-
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -12,50 +10,40 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 45)
     private String name;
     public Role() {
     }
-
     public Role(Long id) {
         this.id = id;
     }
-
     public Role(String name) {
         this.name = name;
     }
-
     public Role(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     @Override
     public String getAuthority() {
         return getName();
     }
-
     @Override
     public String toString() {
         return this.name;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -71,7 +59,6 @@ public class Role implements GrantedAuthority {
         } else if (!id.equals(other.id))
             return false;
         return true;    }
-
     @Override
     public int hashCode() {
         final int prime = 31;

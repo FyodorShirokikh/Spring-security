@@ -7,7 +7,6 @@
 <div>
     <div sec:authorize="isAnonymous()">
         <h4><a th:href="@{/login}">Войти</a></h4>
-        <h4><a th:href="@{/registration}">Зарегистрироваться</a></h4>
     </div>
     <div sec:authorize="isAuthenticated()">
         <h4><a th:href="@{/logout}">Выйти</a></h4>

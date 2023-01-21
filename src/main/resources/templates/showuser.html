@@ -8,13 +8,12 @@
 <h2>Show user:</h2>
 
 <div th:object="${user}">
-    <td><a th:text="${user.getId()}">id</a></td>
     <td><a th:text="${user.getUsername()}">name</a></td>
-    <td><a th:text="${user.getLastname()}">lastname</a></td>
+    <td><a th:text="${user.getEmail()}">email</a></td>
     <td><a th:text="${user.getAge()}">age</a></td>
 </div>
 <hr>
-<a th:href="@{/}"> Back </a>
+<a th:href="@{/}"> Back </a> <br>
 <a th:href="@{/logout}"> Logout </a>
 </body>
 </html>

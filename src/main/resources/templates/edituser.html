@@ -6,15 +6,49 @@
 </head>
 <body>
 <h2>Edit user:</h2>
-<form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}"
-      th:object="${user}" >
-  <input type="text" th:field="*{username}" placeholder="User Name">
-  <input type="text" th:field="*{lastname}" placeholder="User lastname">
-  <input type="number" th:field="*{age}" placeholder="User age">
-  <input type="submit" value="Save user">
+<form th:method="POST" th:action="@{/admin/save}" th:object="${user}">
+  <input type="hidden" th:field="*{id}" />
+  <div>
+    <div>
+      <label>User Name: </label>
+      <div>
+        <input type="text" th:field="*{username}" required minlength="2" maxlength="20" />
+      </div>
+    </div>
+    <div>
+      <label>User email: </label>
+      <div>
+        <input type="email" th:field="*{email}"  />
+      </div>
+    </div>
+    <div>
+      <label>User password: </label>
+      <div>
+        <input type="password" th:field="*{password}" />
+      </div>
+    </div>
+    <div>
+      <label>User age: </label>
+      <div>
+        <input type="number" th:field="*{age}" />
+      </div>
+    </div>
+    <div>
+      <label>User Roles: </label>
+      <div>
+        <th:block th:each="role: ${listRoles}">
+          <input type="checkbox" th:field="*{roles}"
+                 th:text="${role.name}" th:value="${role.id}"/>
+        </th:block>
+      </div>
+    </div>
+    <div>
+      <button type="submit">Update</button>
+    </div>
+  </div>
 </form>
 <hr>
-<a th:href="@{/}"> Back to Users List</a>
+<a th:href="@{/admin}"> Back to Users List</a> <br>
 <a th:href="@{/logout}"> Logout </a>
 </body>
 </html>
