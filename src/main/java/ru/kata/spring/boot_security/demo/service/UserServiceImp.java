@@ -23,11 +23,13 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     @Autowired
     private final RoleRepository roleRepository;
+
     public UserServiceImp(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
+
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
