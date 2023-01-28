@@ -33,14 +33,22 @@
         <input type="number" th:field="*{age}" />
       </div>
     </div>
-    <div>
-      <label>User Roles: </label>
-      <div>
-        <th:block th:each="role: ${listRoles}">
-          <input type="checkbox" th:field="*{roles}"
-                 th:text="${role.name}" th:value="${role.id}"/>
-        </th:block>
-      </div>
+    <div th:field="*{roles}">
+        <label>User Roles: </label> <br>
+       <label>
+            <th:block th:text="ROLE_USER">Label</th:block>
+            <input type="hidden" th:name="role_u" th:value="1"/>
+            <input type="checkbox" th:name="role1c" th:checked="${role1c}"
+                   th:value="1"
+                   onclick="this.value = this.checked"/>
+       </label><br>
+        <label>
+          <th:block th:text="ROLE_ADMIN">Label</th:block>
+          <input type="hidden" th:name="role_a" th:value="1"/>
+          <input type="checkbox" th:name="role2c" th:checked="${role2c}"
+                 th:value="1"
+                 onclick="this.value = this.checked"/>
+        </label>
     </div>
     <div>
       <button type="submit">Update</button>

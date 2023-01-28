@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.repository.RoleRepositoryImp;
+import ru.kata.spring.boot_security.demo.repository.UserRepositoryImp;
+import ru.kata.spring.boot_security.demo.service.UserServiceImp;
 
 @Configuration
 @EnableWebSecurity
@@ -37,10 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserService();
+        return new UserServiceImp(new BCryptPasswordEncoder(), new UserRepositoryImp(), new RoleRepositoryImp());
     }
+
     @Bean
-    public BCryptPasswordEncoder  passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
     @Bean

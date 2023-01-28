@@ -11,16 +11,8 @@ public class Role implements GrantedAuthority {
     private Long id;
     @Column(name = "name", nullable = false, length = 45)
     private String name;
-    public Role() {
-    }
-    public Role(Long id) {
-        this.id = id;
-    }
+    public Role() {}
     public Role(String name) {
-        this.name = name;
-    }
-    public Role(Long id, String name) {
-        this.id = id;
         this.name = name;
     }
     public Long getId() {
